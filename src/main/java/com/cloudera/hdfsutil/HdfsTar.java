@@ -15,6 +15,7 @@ import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.LocatedFileStatus;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.fs.RemoteIterator;
+import org.apache.hadoop.security.UserGroupInformation;
 import org.codehaus.plexus.archiver.tar.TarGZipUnArchiver;
 
 public class HdfsTar {
@@ -37,6 +38,9 @@ public class HdfsTar {
 	    conf.addResource(new Path("/etc/hadoop/conf/core-site.xml"));
 	    conf.addResource(new Path("/etc/hadoop/conf/hdfs-site.xml"));
 
+	    conf.set("sasl.mechanism", "GSSAPI");
+		conf.set("sasl.kerberos.service.name", "kafka");
+	    
 	    Path path = new Path(source);
 	    
 	    try {
