@@ -46,9 +46,12 @@ do
 done
 echo $SPARK_JARS
 
+JAAS_CONF=${HOME}/jaas.conf
+
+
 ##
 ## We need to expand the path before passing to spark files argument.
 ## 
 RUNTIME_PROPERTY_FILE=$(expandPath '~/runtime.json')
 
-java -cp $APP_JAR:$SPARK_JARS com.cloudera.hdfsutil.HdfsTar $1 $2
+java -Djava.security.auth.login.config=${JAAS_CONF} -cp $APP_JAR:$SPARK_JARS com.cloudera.hdfsutil.HdfsTar $1 $2
