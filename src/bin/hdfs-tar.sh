@@ -51,4 +51,4 @@ echo $SPARK_JARS
 ## 
 RUNTIME_PROPERTY_FILE=$(expandPath '~/runtime.json')
 
-java -cp $APP_JAR,$SPARK_JARS com.cloudera.HdfsTar $1 $2
+java -cp $APP_JAR,$SPARK_JARS com.cloudera.hdfsutil.HdfsTar $1 $2
