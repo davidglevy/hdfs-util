@@ -29,7 +29,7 @@ SPARK_KAFKA_VERSION=0.10
 export SPARK_KAFKA_VERSION
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-APP_JAR="${DIR}/../gaffer-spark-streaming.jar"
+APP_JAR="${DIR}/../hdfs-util.jar"
 echo $APP_JAR
 SPARK_JARS=""
 FIRST_ITER=true
