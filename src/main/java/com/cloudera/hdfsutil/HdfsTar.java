@@ -69,7 +69,8 @@ public class HdfsTar {
 
 			Path base = new Path(destination);
 			if (!fs.exists(base)) {
-				throw new IllegalArgumentException("Path doesn't exist [" + destination + "]");
+				System.out.println("Path doesn't exist [" + destination + "]");
+				System.exit(1);
 			} else {
 				System.out.println("Destination exists");
 			}
@@ -84,12 +85,11 @@ public class HdfsTar {
 					count++;
 				}
 
-				System.out.println("Existing directory has [" + count + "] files");
-				
 				if (count > 0) {
-					throw new IllegalArgumentException("Destination [" + destination + "] is not empty");
+					System.out.println("Destination [" + destination + "] is not empty");
+					System.exit(1);
 				} else {
-					System.out.println("Destination is empty");
+					System.out.println("Destination [" + destination + "] is empty");
 				}
 
 			} else {
