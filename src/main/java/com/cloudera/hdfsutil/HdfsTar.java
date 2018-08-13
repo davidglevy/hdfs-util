@@ -80,7 +80,7 @@ public class HdfsTar {
 
 				int count = 0;
 				RemoteIterator<LocatedFileStatus> files = fs.listFiles(base, true);
-				while (count == 0) {
+				while (count == 0 && files.hasNext()) {
 					files.next();
 					count++;
 				}
