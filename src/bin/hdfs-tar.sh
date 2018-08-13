@@ -54,4 +54,4 @@ JAAS_CONF=${HOME}/jaas.conf
 ## 
 RUNTIME_PROPERTY_FILE=$(expandPath '~/runtime.json')
 
-java -Djava.security.auth.login.config=${JAAS_CONF} -cp $APP_JAR:$SPARK_JARS com.cloudera.hdfsutil.HdfsTar $1 $2
+java -Djava.security.krb5.conf=/etc/krb5.conf -Djava.security.auth.login.config=${JAAS_CONF} -cp $APP_JAR:$SPARK_JARS com.cloudera.hdfsutil.HdfsTar $1 $2
