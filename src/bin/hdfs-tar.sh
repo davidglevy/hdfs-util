@@ -37,7 +37,7 @@ FIRST_ITER=true
 for x in `ls "${DIR}/../lib/runtime"`
 do
   if [ "$FIRST_ITER" = false ] ; then
-    SPARK_JARS="${SPARK_JARS},"
+    SPARK_JARS="${SPARK_JARS}:"
   fi
   if [ "$FIRST_ITER" = true ] ; then
     FIRST_ITER=false
@@ -51,4 +51,4 @@ echo $SPARK_JARS
 ## 
 RUNTIME_PROPERTY_FILE=$(expandPath '~/runtime.json')
 
-java -cp $APP_JAR,$SPARK_JARS com.cloudera.hdfsutil.HdfsTar $1 $2
+java -cp $APP_JAR:$SPARK_JARS com.cloudera.hdfsutil.HdfsTar $1 $2
