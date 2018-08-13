@@ -38,11 +38,6 @@ public class HdfsTar {
 	    conf.set("com.sun.security.auth.module.Krb5LoginModule", "required");
 	    conf.set("debug", "true");
 	    
-	    //conf.set("sasl.mechanism", "GSSAPI");
-		//conf.set("sasl.kerberos.service.name", "kafka");
-	    //conf.set("hadoop.security.authentication", "Kerberos");
-		
-	    
 	    try {
 
 		    UserGroupInformation.setConfiguration(conf);
@@ -83,13 +78,14 @@ public class HdfsTar {
 				System.out.println("Destination is a directory");
 
 				int count = 0;
-				RemoteIterator<LocatedFileStatus> files = fs.listFiles(base, false);
+				RemoteIterator<LocatedFileStatus> files = fs.listFiles(base, true);
 				while (files.hasNext()) {
 					files.next();
 					count++;
-					break;
 				}
 
+				System.out.println("Existing directory has [" + count + "] files");
+				
 				if (count > 0) {
 					throw new IllegalArgumentException("Destination [" + destination + "] is not empty");
 				} else {
