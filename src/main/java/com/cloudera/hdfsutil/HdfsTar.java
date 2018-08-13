@@ -17,8 +17,6 @@ import org.apache.hadoop.security.UserGroupInformation;
 
 public class HdfsTar {
 
-	private static final int BUFFER_SIZE = 4096;
-
 	public static void main(String[] args) {
 		if (args.length < 2) {
 			System.out.println("hdfs-tar [source-tar-gz] [dest-folder]");
@@ -52,9 +50,12 @@ public class HdfsTar {
 		try (FSDataInputStream inputStream = fs.open(path)) {
 		    
 		    extractTarGZ(inputStream, destination, fs);
-		}
+		} 
 
-		
+	    } catch (IllegalArgumentException e1) {
+	    	System.out.println("Unable to proceed: " + e1.getMessage());
+	    	System.out.println("We will now exit without extraction");
+	    	System.exit(2);
 	    } catch (Exception e) {
 	    	System.out.println("Exception processing extraction: " + e.getMessage());
 	    	e.printStackTrace();
@@ -69,8 +70,7 @@ public class HdfsTar {
 
 			Path base = new Path(destination);
 			if (!fs.exists(base)) {
-				System.out.println("Path doesn't exist [" + destination + "]");
-				System.exit(1);
+				throw new IllegalArgumentException("Path doesn't exist [" + destination + "]");
 			} else {
 				System.out.println("Destination exists");
 			}
@@ -86,8 +86,7 @@ public class HdfsTar {
 				}
 
 				if (count > 0) {
-					System.out.println("Destination [" + destination + "] is not empty");
-					System.exit(1);
+					throw new IllegalArgumentException("Destination [" + destination + "] is not empty");
 				} else {
 					System.out.println("Destination [" + destination + "] is empty");
 				}
